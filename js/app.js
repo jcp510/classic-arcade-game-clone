@@ -42,7 +42,7 @@ var Player = function(x, y) {
     Enemy.call(this, x, y);
     this.sprite = 'images/char-boy.png';
     this.x = x;
-    this.y =y;
+    this.y = y;
 };
 
 // Create Player.prototype object to inherit render method from
@@ -60,24 +60,22 @@ Player.prototype.handleInput = function(key) {
 };
 
 Player.prototype.update = function() {
-    // If player-enemy collision, reset player to start position.
-    if (this.x === Enemy.x && this.y === Enemy.y) {
-        this.x = 202;
-        this.y = 315;
-    };
     // Prevent player from going off game board.
     if (this.x > 404) {this.x = 404};
     if (this.x < 0) {this.x = 0};
     if (this.y > 410) {this.y = 410};
-    if (this.y < -5) {this.y = -5};
+    // Reset player to start position if player reaches water.
+    if (this.y < 0) {this.x = 202; this.y = 410};
 };
+
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [new Enemy(404, 60), new Enemy(0, 145), new Enemy(202, 230)];
 
-var player = new Player(202, 315);
+var player = new Player(202, 400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
