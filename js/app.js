@@ -19,7 +19,6 @@ Enemy.prototype.speed = function (min, max) {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-// TODO: Handle collisions with Player here
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
@@ -59,16 +58,25 @@ Player.prototype.handleInput = function(key) {
     if (key === 'down') {this.y += 85};
 };
 
+Player.prototype.startPosition = function() {
+    this.x = 202;
+    this.y = 410;
+};
 Player.prototype.update = function() {
     // Prevent player from going off game board.
     if (this.x > 404) {this.x = 404};
     if (this.x < 0) {this.x = 0};
     if (this.y > 410) {this.y = 410};
     // Reset player to start position if player reaches water.
-    if (this.y < 0) {this.x = 202; this.y = 410};
+    if (this.y < 0) {this.startPosition();};
+    // Reset player to start position if player collides with enemy.
+    for (var i = 0; i < allEnemies.length; i++) {
+        if (this.x < allEnemies[i].x + 75 &&
+        this.x + 75 > allEnemies[i].x &&
+        this.y < allEnemies[i].y + 75 &&
+        75 + this.y > allEnemies[i].y) {this.startPosition();};
+    }
 };
-
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
