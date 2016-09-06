@@ -52,10 +52,10 @@ Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.handleInput = function(key) {
-    if (key === 'left') {this.x -= 101};
-    if (key === 'right') {this.x += 101};
-    if (key === 'up') {this.y -= 85};
-    if (key === 'down') {this.y += 85};
+    if (key === 'left') {this.x -= 101;}
+    if (key === 'right') {this.x += 101;}
+    if (key === 'up') {this.y -= 85;}
+    if (key === 'down') {this.y += 85;}
 };
 
 Player.prototype.startPosition = function() {
@@ -64,17 +64,17 @@ Player.prototype.startPosition = function() {
 };
 Player.prototype.update = function() {
     // Prevent player from going off game board.
-    if (this.x > 404) {this.x = 404};
-    if (this.x < 0) {this.x = 0};
-    if (this.y > 410) {this.y = 410};
+    if (this.x > 404) {this.x = 404;}
+    if (this.x < 0) {this.x = 0;}
+    if (this.y > 410) {this.y = 410;}
     // Reset player to start position if player reaches water.
-    if (this.y < 0) {this.startPosition();};
+    if (this.y < 0) {this.startPosition();}
     // Reset player to start position if player collides with enemy.
     for (var i = 0; i < allEnemies.length; i++) {
         if (this.x < allEnemies[i].x + 75 &&
         this.x + 75 > allEnemies[i].x &&
         this.y < allEnemies[i].y + 75 &&
-        75 + this.y > allEnemies[i].y) {this.startPosition();};
+        75 + this.y > allEnemies[i].y) {this.startPosition();}
     }
 };
 
